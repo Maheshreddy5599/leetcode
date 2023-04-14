@@ -1,0 +1,44 @@
+class Solution {
+    public double findMedianSortedArrays(int[] a, int[] b) {
+        
+        int len = a.length + b.length;
+        
+        int aIndex = 0;  // Iterator for nums1 array
+        int bIndex = 0;  // Iterator for nums2 array
+        
+        int previous = 0;           // for even case
+        int current = 0;            // for odd and even case
+        int resultIndex = 0;        // merged sorted array Index 
+        
+        while(resultIndex++ <= (len / 2)) {     // LOOP UP TO (M + N) / 2
+            
+            previous = current;          // assign current value to previous
+
+            if(aIndex >= a.length) {     // if aIndex >= a length then only use b;
+                current = b[bIndex++];   // update current value and increment bIndex;
+                continue;                
+            } 
+            
+            if(bIndex >= b.length ) {    // similar as above,for bIndex
+                current = a[aIndex++];
+                continue;
+            } 
+            
+            if(a[aIndex] < b[bIndex]) {  // marge method;
+                current = a[aIndex++];
+            } else {
+                current = b[bIndex++];
+            }
+        }
+        
+        if(len % 2 == 0) {   
+            return (double) (previous  + current)/2;   // if len is even
+        } else {
+            return (double) current;                   // if len is odd
+        }
+    }
+}
+=========================================================================================================================================
+TODO:
+https://medium.com/@hazemu/finding-the-median-of-2-sorted-arrays-in-logarithmic-time-1d3f2ecbeb46#id_token=eyJhbGciOiJSUzI1NiIsImtpZCI6Ijk2OTcxODA4Nzk2ODI5YTk3MmU3OWE5ZDFhOWZmZjExY2Q2MWIxZTMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJuYmYiOjE2ODE0ODk1OTksImF1ZCI6IjIxNjI5NjAzNTgzNC1rMWs2cWUwNjBzMnRwMmEyamFtNGxqZGNtczAwc3R0Zy5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjExMDYyMDAzOTMxMDkwMDk1MDI5MiIsImVtYWlsIjoidmlrYWFzamVycnlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF6cCI6IjIxNjI5NjAzNTgzNC1rMWs2cWUwNjBzMnRwMmEyamFtNGxqZGNtczAwc3R0Zy5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsIm5hbWUiOiJJbmRsYSBNYWhlc2hLdW1hciBSZWRkeSIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BR05teXhZRnZzQndVb2tKV1IycVlDODhRVmRPTkVoY2lwSHBIVHhoQnByZj1zOTYtYyIsImdpdmVuX25hbWUiOiJJbmRsYSBNYWhlc2hLdW1hciIsImZhbWlseV9uYW1lIjoiUmVkZHkiLCJpYXQiOjE2ODE0ODk4OTksImV4cCI6MTY4MTQ5MzQ5OSwianRpIjoiYzc5MDZmMWUyN2MzOTk0MmM4NGY4NWI3MTFiZDA1NGFjMzdhOWNlZSJ9.c00ASlpP36-L399IOVuB22DXvcyH0_o3dhGV8ADKT-_uJskxiPfJqXlQdvepNvqaJ5zPr2lr_ZawhugunlEgwutHCOsKWLzuPseEI1sJ9qetKlsoFRhZ6ObnnR_kgWXAwzwyllGSSkMGjjv3rv6LmZHepVNc3j1XN5E6IN3DRx2nW42PnEBC4sn7kEjbl3_QiTFwAC7D33-xjzvF0MZtLKXnFQ29NHFB-oEdW_rgnk33st54an3RXOtOw7X4Cu_RBuI9eeGTaIImj1NwL9Bs8xaYGqlBLbhRls712XYor7CiLkw4wtdFlUcEbKnn_ZNGI7Dmlvvlv4UbbI8m0jhVaQ
+log(m+n)
