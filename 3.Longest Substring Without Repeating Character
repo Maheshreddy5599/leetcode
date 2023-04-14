@@ -1,0 +1,33 @@
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        Set<Character> set=new HashSet<>();
+        int ans=0;
+        int left=0; //left pointer
+        for(int right=0; right<s.length(); right++){  //right pointer
+            if(!set.contains(s.charAt(right))){
+                set.add(s.charAt(right));
+                ans=Math.max(ans,right-left+1);
+            }else{
+                while(s.charAt(left)!=s.charAt(right)){
+                    set.remove(s.charAt(left));
+                    left++;
+                }
+                set.remove(s.charAt(left));left++;
+                set.add(s.charAt(right));
+            }
+        }
+        return ans;
+    }
+}
+
+
+Intuition
+if you know sliding window...then it can be intuitive. But if you don't know ...no worry i will teach you...
+Refer below approach points.....
+
+Approach
+Use sliding window with hashset, use left and right pointers to move the window .
+If the set doesn't contains character then first add into the set and calculate the maxLength hand-in-hand...
+if character already present in the set that means you have to move your sliding window by 1 , before that you have to remove all the characters that are infront of the character that is present already in window before.
+Now you have to remove that character also and move the left pointer and also add the new character into the set.
+THAT'S ALL........EASY APPROACH USING SIMPLE HASHSET+SLIDING WINDOW
