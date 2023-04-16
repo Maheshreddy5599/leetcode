@@ -1,0 +1,26 @@
+Solution:
+class Solution {
+    public String convert(String s, int numRows) {
+        if(numRows==1) return s;
+        String ans="";
+        for(int i=0;i<numRows;i++){
+            int indexToAdd=(numRows-1)*2; 
+            for(int j=i;j<s.length();j=j+indexToAdd){
+                 ans=ans+s.charAt(j); 
+                if(i!=0 && i!=numRows-1){
+                    int k=j+(indexToAdd-(2*i));
+                    if(k<s.length())
+                        ans+=s.charAt(k);
+                }
+               
+            }
+        }
+        return ans;
+    }
+}
+=====================================================================================================================
+
+approach:
+For the first and last row the skipped number of charaters are
+2*(numRows-1)
+For rest of the rows number of characters skipped are 2*(numRows-1) and [2*(numRows-1)]-(2*r) where r corresponds to the number of rows
