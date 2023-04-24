@@ -1,0 +1,29 @@
+priority queue:
+class Solution {
+    public int lastStoneWeight(int[] stones) {
+       PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+       for(int x:stones) pq.offer(x);
+       while(pq.size()>1){
+           int x=pq.poll();
+           int y=pq.poll();
+           if(x!=y) pq.offer(x-y);
+       }
+       return pq.isEmpty() ? 0 : pq.peek();
+    }
+}
+===================================================================================================
+recursive:
+class Solution {
+    public int lastStoneWeight(int[] stones) {
+        Arrays.sort(stones);
+        if(stones.length==1)
+            return stones[stones.length-1];
+        if(stones[stones.length-2]==0)
+            return stones[stones.length-1];
+        
+        stones[stones.length-1]-=stones[stones.length-2];
+        stones[stones.length-2]=0;
+        
+        return lastStoneWeight(stones);
+    }
+}
