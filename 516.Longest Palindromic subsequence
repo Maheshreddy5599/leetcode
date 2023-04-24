@@ -1,0 +1,35 @@
+memorized version
+import java.lang.*;
+import java.io.*;
+import java.util.*;
+class Solution {
+    public int longestPalindromeSubseq(String s) {
+         int n = s.length();
+        Integer[][] dp = new Integer[n + 1][n + 1];
+        StringBuffer sbr = new StringBuffer(s);
+        sbr.reverse();
+        return lcsMemorization(s, sbr.toString(),n, n, dp);
+    }
+
+     int lcsMemorization(String text1, String text2, int n, int m, Integer[][] dp) {
+        // base case
+        if (n == 0 || m == 0)
+            return 0;
+        
+        if (dp[n][m] != null)
+            return dp[n][m];
+        
+        int lcs = 0;
+        if (text1.charAt(n - 1) == text2.charAt(m - 1)) {
+            lcs = 1 + lcsMemorization(text1, text2, n - 1, m - 1, dp);
+        } else {
+            lcs = Math.max(
+                lcsMemorization(text1, text2, n - 1, m, dp), 
+                lcsMemorization(text1, text2, n, m - 1, dp));
+        }
+        
+        return dp[n][m] = lcs;
+    }
+}
+=====================================================================
+//same for the tabulation and recursion
